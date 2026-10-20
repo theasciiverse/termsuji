@@ -84,6 +84,10 @@ func NewGoBoard(app *tview.Application, c *config.Config, hint *tview.TextView) 
 		if goBoard.BoardState == nil {
 			return x, y, 1, 1
 		}
+		if goBoard.cfg.Theme.Grid {
+			goBoard.drawGrid(screen, x, y, width, height)
+			return x, y, width, height
+		}
 		//To approximate squares, double the width of characters
 		boardW, boardH := goBoard.BoardState.Width()*2, goBoard.BoardState.Height()
 

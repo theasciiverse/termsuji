@@ -1,6 +1,7 @@
 package config
 
 var DefaultConfig Config
+var ClassicTheme Theme
 var DefaultTheme Theme
 var VaporwaveTheme Theme
 var UnicodeTheme Theme
@@ -32,8 +33,18 @@ func init() {
 			LastPlayed:  '/',
 		},
 	}
+	ClassicTheme = DefaultTheme
+	ClassicTheme.Grid = true
+	ClassicTheme.Colors.BoardColor = 179   //wood
+	ClassicTheme.Colors.BoardColorAlt = 94 //lines
+	ClassicTheme.Colors.BlackColor = 232
+	ClassicTheme.Colors.WhiteColor = 231
+	ClassicTheme.Colors.CursorColorBG = 33
+	ClassicTheme.Colors.LastPlayedColorBG = 166
+	ClassicTheme.Symbols.BlackStone = '●'
+	ClassicTheme.Symbols.WhiteStone = '●'
 	DefaultConfig = Config{
-		Theme: DefaultTheme,
+		Theme: ClassicTheme,
 	}
 
 	VaporwaveTheme = DefaultTheme

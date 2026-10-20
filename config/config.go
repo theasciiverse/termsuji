@@ -43,6 +43,12 @@ type ConfigSymbols struct {
 }
 
 type Theme struct {
+	//Grid draws the board as lines and points, with stones on the points,
+	//scaled to the space (colors: board for the wood, board_alt for the
+	//lines, black and white for the stones, cursor_bg and last_played_bg
+	//behind those points); otherwise squares are drawn, two characters
+	//each.
+	Grid                     bool          `json:"grid"`
 	DrawStoneBackground      bool          `json:"draw_stone_bg"`
 	DrawCursorBackground     bool          `json:"draw_cursor_bg"`
 	DrawLastPlayedBackground bool          `json:"draw_last_played_bg"`

@@ -67,7 +67,7 @@ func main() {
 	gameHint.SetBorder(true)
 	gameBoard = ui.NewGoBoard(app, cfg, gameHint)
 	gameFrame.
-		AddItem(gameBoard.Box, 20*2+3, 1, true).
+		AddItem(gameBoard.Box, 0, 3, true).
 		AddItem(gameHint, 0, 2, false)
 	newGameForm := tview.NewForm()
 	gameBoard.Box.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
@@ -168,6 +168,8 @@ func main() {
 	selectTheme := func(i int, main, secondary string, shortcut rune) {
 		var theme config.Theme
 		switch main {
+		case "classic":
+			theme = config.ClassicTheme
 		case "default":
 			theme = config.DefaultTheme
 		case "vaporwave":
@@ -189,7 +191,8 @@ func main() {
 		rootPage.HidePage("themes")
 	}
 	themeList.
-		AddItem("default", "The default board theme", '1', nil).
+		AddItem("classic", "Lines and points on wood (the default)", '0', nil).
+		AddItem("default", "Coloured squares (termsuji's original look)", '1', nil).
 		AddItem("vaporwave", "Magenta/cyan board theme", '2', nil).
 		AddItem("unicode", "Display board with Unicode emoji symbols", '3', nil).
 		AddItem("catdog", "Board becomes zoo", '4', nil).
