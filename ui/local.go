@@ -230,7 +230,7 @@ func (g *GoBoardUI) refreshLocal() {
 	if !l.over {
 		keys = "\n\narrow keys: move cursor\nReturn: play move\np: pass turn\nu: take back a move\nq: menu (the game is saved)"
 	}
-	g.hint.SetText(fmt.Sprintf("You: %s    GNU Go (level %d): %s\nCaptured: you %d, GNU Go %d\nMove %d\n\n%s%s",
+	g.hint.SetText(fmt.Sprintf("You: %s\nGNU Go (level %d): %s\nCaptured: you %d, GNU Go %d\nMove %d\n\n%s%s",
 		colourWord(you), l.settings.Level, colourWord(them),
 		l.eng.Captures(you), l.eng.Captures(them), len(moves)+1, status, keys))
 }
