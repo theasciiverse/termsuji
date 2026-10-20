@@ -133,9 +133,9 @@ func (g *GoBoardUI) afterMove() {
 		l.over = true
 		score, err := l.eng.FinalScore()
 		if err != nil {
-			l.outcome = "Both passed. GNU Go could not count the game: " + err.Error()
+			l.outcome = "Both passed.\nGNU Go could not count the game: " + err.Error()
 		} else {
-			l.outcome = "Both passed. " + scoreWords(score)
+			l.outcome = "Both passed.\n" + scoreWords(score)
 		}
 		l.forget()
 	}
