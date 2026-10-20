@@ -29,6 +29,7 @@ type GoBoardUI struct {
 	app          *tview.Application
 	rc           *api.RealtimeClient
 	styles       []tcell.Color
+	local        *localGame //a game against GNU Go, or nil (see local.go)
 }
 
 func (g *GoBoardUI) SelectedTile() *api.BoardPos {
@@ -182,14 +183,20 @@ func (g *GoBoardUI) PlayMove(x, y int) {
 	if g.BoardState.Finished() {
 		return
 	}
+	if g.local != nil {
+		g.playLocal(x, y)
+		return
+	}
 	g.rc.Move(x, y)
 }
 
 func (g *GoBoardUI) Close() {
+	g.closeLocal()
 	if g.rc == nil {
 		return
 	}
 	g.rc.Disconnect()
+	g.rc = nil
 }
 
 func (g *GoBoardUI) SetConfig(c *config.Config) {
