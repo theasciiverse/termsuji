@@ -257,7 +257,12 @@ func drawCoordinates(s tcell.Screen, x, y int, ui *GoBoardUI) {
 		} else if ix == ui.BoardState.LastMove.X {
 			_style = lpHighlight
 		}
-		s.SetContent(x+4+(ix*2), y+h+1, rune(hCoord+ix), nil, _style)
+		//Go coordinates skip the letter I
+		letter := ix
+		if letter >= 8 {
+			letter++
+		}
+		s.SetContent(x+4+(ix*2), y+h+1, rune(hCoord+letter), nil, _style)
 		s.SetContent(x+5+(ix*2), y+h+1, ' ', nil, _style)
 	}
 
@@ -274,8 +279,8 @@ func drawCoordinates(s tcell.Screen, x, y int, ui *GoBoardUI) {
 		if displayNum >= 10 {
 			tensRune = rune('0' + int((displayNum-(displayNum%10))/10))
 		}
-		s.SetContent(1, y+h-iy-1, tensRune, nil, _style)
-		s.SetContent(2, y+h-iy-1, rune('0'+(displayNum%10)), nil, _style)
+		s.SetContent(x+1, y+h-iy-1, tensRune, nil, _style)
+		s.SetContent(x+2, y+h-iy-1, rune('0'+(displayNum%10)), nil, _style)
 	}
 	s.Show()
 }
