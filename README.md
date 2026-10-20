@@ -1,13 +1,51 @@
 # Termsuji
 
-termsuji is an application to play Go in your terminal. It is limited in features and scope, but you can play and finish games in progress on it. It is on github as a reference implementation, and not a reliable or stable package.
+termsuji plays Go in your terminal: against GNU Go on your own computer,
+or (in a build with an online-go.com client id) your games on
+online-go.com.
 
-The *api* package can be used as a starting point to work with the online-go.com REST and realtime APIs. It only exports a limited part of the API and it may change without notice.
+This is the Asciiverse edition of [lvank's termsuji](https://github.com/lvank/termsuji),
+an online-go.com client, with play against GNU Go added: GNU Go 3.9.1
+comes beside termsuji in each download. What changed is in `PATCHES.md`.
 
-If you want to build yourself (or if your architecture isn't listed), [download/install Go 1.18 or higher](https://go.dev/dl), download and extract the source code, register an Oauth application at https://online-go.com/oauth2/applications/ (this requires an online-go.com account), set the client type to "Public" and the grant type to "resource owner password based", place the client ID in `api/client_id.txt` without any whitespace, and run/build the application with `go run .` or `go build .` in the source code directory.
+## Playing
 
-![termsuji_game](https://user-images.githubusercontent.com/110688516/184015075-afa1bb8b-cdff-4e53-ba89-45be2353d2ed.png)
-![termsuji_unicode](https://user-images.githubusercontent.com/110688516/184015096-a47c3439-0809-43ea-a89e-61a572c7c9f1.png)
+    termsuji
+
+**New game** sets up a game against GNU Go: the board (9x9, 13x13 or
+19x19), your colour (Black moves first), GNU Go's strength from 1 to 10,
+and handicap stones for Black. Komi is 6.5, or 0.5 with a handicap.
+**Continue** picks up your game where you left it: it is saved after
+every move.
+
+- Arrow keys move the cursor (the first press puts it on the last stone
+  played), Return plays a stone there.
+- **p** passes; when both players pass in a row the game ends and GNU Go
+  counts it. GNU Go may also resign.
+- **u** takes back your last move and GNU Go's answer.
+- **t** chooses a theme, **q** goes back to the menu (q first clears the
+  cursor if one is shown).
+- **n** starts a new game once a game is over.
+
+The game is saved in `$XDG_DATA_HOME/termsuji` (`~/.local/share/termsuji`,
+`%LOCALAPPDATA%\termsuji` on Windows) as `game.sgf`, which any Go program
+can open, beside `game.json` with its settings.
+
+termsuji finds GNU Go beside itself, else on the PATH.
+
+## Playing on online-go.com
+
+The online part is lvank's, unchanged: it can play and finish games in
+progress on online-go.com, and is limited in features. It needs an OAuth
+application registered at https://online-go.com/oauth2/applications/
+(client type "Public", grant type "resource owner password based"); put
+its client ID in `api/client_id.txt` before building, and **Play online**
+appears in the menu.
+
+## Building
+
+    go build .                 # termsuji; api/client_id.txt may be empty
+    asciiverse/gnugo.sh        # GNU Go into stage/ (see the script for Windows)
 
 ## Configuration
 
@@ -23,6 +61,7 @@ To reset your default settings, just delete the configuration file and it'll be 
 
 ```
 {"theme": {
+  "grid": If true (the classic theme), draws the board as lines and points on wood, scaled to the window: colours "board" for the wood, "board_alt" for the lines, "black"/"white" for the stones, "cursor_bg" and "last_played_bg" for the marks; symbols "black"/"white" for the stones when the board is too dense for discs. If false, draws squares as below.
   "draw_stone_bg": If true, will draw a stone with the black/black_alt colours. If false, draws the black/white symbols instead. Default true.
   "draw_cursor_bg": If true, will draw the currently selected square with the cursor_bg colour. If false, draws the cursor symbol instead. Default false.
   "draw_last_played_bg": If true, will draw the last played stone with the last_played_bg colour. If false, draws the last_played symbol instead. Default false.
