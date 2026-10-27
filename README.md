@@ -1,3 +1,16 @@
+> **Play it with Asciiverse.** With [av](https://asciiverse.sh), the Asciiverse
+> client:
+>
+> ```
+> av install termsuji
+> av play termsuji
+> ```
+>
+> Or download the archive for your system from this repository's Releases,
+> unpack it and run `./termsuji` (`termsuji.exe` on Windows).
+>
+> The original README follows.
+
 # Termsuji
 
 termsuji plays Go in your terminal: against GNU Go on your own computer,

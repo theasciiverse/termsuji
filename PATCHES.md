@@ -99,3 +99,9 @@ GNU Go's answers, leaving to the menu and Continue (the save is SGF with
 its moves), undo; GNU Go exits with termsuji when its window is closed.
 Windows: termsuji cross-compiled, GNU Go cross-built and answering GTP
 under Wine; termsuji itself is not run there. macOS: not built here.
+
+## Ours
+
+- **How to play it, at the top of README.md.** A short note on installing and
+  starting it with av, or from a release archive; the original text follows
+  unchanged.
